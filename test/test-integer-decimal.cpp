@@ -25,7 +25,7 @@
 
 namespace quick_lint_js {
 namespace {
-TEST(test_integer_from_chars, common_integers) {
+TEST(test_integer_from_chars_decimal, common_integers) {
   {
     int number;
     const char *input = "0";
@@ -57,7 +57,7 @@ TEST(test_integer_from_chars, common_integers) {
   }
 }
 
-TEST(test_integer_from_chars, minimum_integer) {
+TEST(test_integer_from_chars_decimal, minimum_integer) {
   static_assert(std::numeric_limits<int>::min() == -2147483648LL);
   int number;
   const char *input = "-2147483648";
@@ -68,7 +68,7 @@ TEST(test_integer_from_chars, minimum_integer) {
   EXPECT_EQ(result.ec, std::errc{0});
 }
 
-TEST(test_integer_from_chars, maximum_integer) {
+TEST(test_integer_from_chars_decimal, maximum_integer) {
   static_assert(std::numeric_limits<int>::max() == 2147483647);
   int number;
   const char *input = "2147483647";
@@ -79,7 +79,7 @@ TEST(test_integer_from_chars, maximum_integer) {
   EXPECT_EQ(result.ec, std::errc{0});
 }
 
-TEST(test_integer_from_chars, over_maximum_integer) {
+TEST(test_integer_from_chars_decimal, over_maximum_integer) {
   static_assert(std::numeric_limits<int>::max() < 2147483648LL);
 
   {
@@ -103,7 +103,7 @@ TEST(test_integer_from_chars, over_maximum_integer) {
   }
 }
 
-TEST(test_integer_from_chars, extra_characters_after_are_not_parsed) {
+TEST(test_integer_from_chars_decimal, extra_characters_after_are_not_parsed) {
   {
     int number;
     const char *input = "1234abcd";
@@ -125,7 +125,7 @@ TEST(test_integer_from_chars, extra_characters_after_are_not_parsed) {
   }
 }
 
-TEST(test_integer_from_chars, extra_characters_before) {
+TEST(test_integer_from_chars_decimal, extra_characters_before) {
   {
     int number = 42;
     const char *input = "  123";
@@ -157,7 +157,7 @@ TEST(test_integer_from_chars, extra_characters_before) {
   }
 }
 
-TEST(test_integer_from_chars, radix_prefix_is_not_special) {
+TEST(test_integer_from_chars_decimal, radix_prefix_is_not_special) {
   {
     int number;
     const char *input = "0x123a";
@@ -179,7 +179,7 @@ TEST(test_integer_from_chars, radix_prefix_is_not_special) {
   }
 }
 
-TEST(test_integer_from_chars, empty_input_string_is_unrecognized) {
+TEST(test_integer_from_chars_decimal, empty_input_string_is_unrecognized) {
   int number = 42;
   const char *input = "";
   from_chars_result result = from_chars(input, input, number);
@@ -188,7 +188,8 @@ TEST(test_integer_from_chars, empty_input_string_is_unrecognized) {
   EXPECT_EQ(number, 42) << "number should be unmodified";
 }
 
-TEST(test_integer_from_chars, minus_sign_without_digits_is_unrecognized) {
+TEST(test_integer_from_chars_decimal,
+     minus_sign_without_digits_is_unrecognized) {
   int number = 42;
   const char *input = "- 1";
   from_chars_result result = from_chars(input, input, number);
