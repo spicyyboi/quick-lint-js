@@ -270,6 +270,12 @@ class lexer {
     char8* end;
   };
 
+  struct parsed_identifier {
+    // @@@ document
+    char8* end;
+    char8* after;
+  };
+
   parsed_template_body parse_template_body(char8* input,
                                            const char8* template_begin,
                                            error_reporter*);
@@ -280,7 +286,8 @@ class lexer {
   void parse_number();
   char8* parse_decimal_digits_and_underscores(char8* input) noexcept;
 
-  static char8* parse_identifier(char8*);
+  parsed_identifier parse_identifier(char8*);
+  parsed_identifier parse_identifier_slow(char8*);
 
   void skip_whitespace();
   void skip_block_comment();
