@@ -1,0 +1,37 @@
+#!/bin/sh
+
+# @@@ copyright
+
+set -e
+set -u
+
+cd "$(dirname "${0}")/.."
+
+main() {
+  update_template_file
+  update_translation_files
+# @@@  update .mo files
+}
+
+update_template_file() {
+  pot_file=po/messages.pot
+  printf 'updating: %s\n' "${pot_file}"
+
+  pot_temp_file="$(mktemp)"
+  xgettext --keyword=QLJS_TRANSLATE --output="${pot_temp_file}" --force-po --add-location=file --msgid-bugs-address=strager.nds@gmail.com src/quick-lint-js/error.h
+  sed -i -e 's/charset=CHARSET/charset=UTF-8/g' "${pot_temp_file}"
+
+  mkdir -p po
+  msgmerge --backup=none --update -- "${pot_file}" "${pot_temp_file}"
+
+  rm -- "${pot_temp_file}"
+}
+
+update_translation_files() {
+  for po_file in po/*.po ; do
+    printf 'updating: %s\n' "${po_file}"
+    msgmerge --backup=none --update -- "${po_file}" po/messages.pot
+  done
+}
+
+main

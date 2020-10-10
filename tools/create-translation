@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# @@@ copyright
+
+set -e
+set -u
+
+cd "$(dirname "${0}")/../po"
+
+msginit --input=messages.pot

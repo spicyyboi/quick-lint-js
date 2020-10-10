@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# @@@ copyright
+
+set -e
+set -u
+
+cd "$(dirname "${0}")/.."
+
+for po_file in po/*.po ; do
+  mo_directory="po/compiled/$(basename "${po_file}" .po)/LC_MESSAGES"
+  mo_file="${mo_directory}/quick-lint-js.mo"
+  mkdir -p "${mo_directory}"
+  printf 'updating: %s\n' "${mo_file}"
+  msgfmt --output-file="${mo_file}" -- "${po_file}"
+done

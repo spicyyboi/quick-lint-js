@@ -19,6 +19,8 @@ include(GNUInstallDirs)
 include(QuickLintJSCompiler)
 include(QuickLintJSTarget)
 
+find_package(Intl REQUIRED)
+
 option(
   QUICK_LINT_JS_FEATURE_VECTOR_PROFILING
   "Enable the QLJS_DUMP_VECTORS option at run-time"
@@ -54,12 +56,13 @@ quick_lint_js_add_library(
   padded-string.cpp
   parse.cpp
   text-error-reporter.cpp
+  translation.cpp
   vector.cpp
   vim-qflist-json-error-reporter.cpp
   wasm-demo-error-reporter.cpp
 )
-target_include_directories(quick-lint-js-lib PUBLIC .)
-target_link_libraries(quick-lint-js-lib PUBLIC boost_container)
+target_include_directories(quick-lint-js-lib PUBLIC . ${Intl_INCLUDE_DIRS})
+target_link_libraries(quick-lint-js-lib PUBLIC boost_container ${Intl_LIBRARIES})
 
 if (QUICK_LINT_JS_FEATURE_VECTOR_PROFILING)
   target_compile_definitions(
