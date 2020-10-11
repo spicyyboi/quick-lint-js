@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>quick-lint-js finds JavaScript bugs</title>
+    <meta charset="utf-8">
+<style>
+body {
+  font-family: sans-serif;
+}
+
+.feature-comparison table {
+  border-collapse: collapse;
+}
+.feature-comparison td, .feature-comparison th {
+  border-color: #888888;
+  border-style: solid;
+  border-width: 0;
+  padding: .5em 1em;
+  text-align: center;
+}
+.feature-comparison tbody td, .feature-comparison tbody th {
+  border-top-width: 1px;
+}
+.feature-comparison td.good {
+  background-color: #ddffdd;
+}
+.feature-comparison td.bad {
+  background-color: #ffdddd;
+}
+.feature-comparison td.meh {
+  background-color: #ffeecc;
+}
+
+.feature-comparison td.quick-lint-js, .feature-comparison th.quick-lint-js {
+  border-left-width: 1px;
+  border-right-width: 1px;
+}
+
+.feature-comparison .footnote-marker {
+  position: absolute;
+}
+
+.feature-comparison figcaption p {
+  margin-top: .25em;
+  margin-bottom: .25em;
+}
+
+nav > ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+nav li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+nav li > a {
+  padding: 0 1em;
+}
+</style>
+  </head>
+  <body>
+    <header>
+      <h1>quick-lint-js</h1>
+      <p class="tag-line">quick-lint-js finds bugs in JavaScript programs.</p>
+      <nav>
+        <ul>
+          <li><a href="https://github.com/strager/quick-lint-js">source code</a></li>
+          <li><a href="https://quick-lint-js.com/">demo</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h2 id="linter-feature-comparison">Features</h2>
+      <figure class="feature-comparison">
+        <table>
+          <thead>
+            <tr>
+              <th>feature</th>
+              <th class="quick-lint-js">quick-lint-js</th>
+              <th><a href="https://eslint.org/">ESLint</a></th>
+              <th><a href="https://jshint.com/">JSHint</a></th>
+              <th><a href="https://rdambrosio016.github.io/RSLint/index.html">RSLint</a></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>speed</th>
+              <td class="good quick-lint-js"><span aria-labelled-by="feature-speed-qljs-quick">🚀</span><br><span id="feature-speed-qljs-quick">quick</span></td>
+              <td class="bad"><span aria-labelled-by="feature-speed-eslint-slow">🐢</span><br><span id="feature-speed-eslint-slow">slow</span></td>
+              <td class="bad"><span aria-labelled-by="feature-speed-jshint-slow">🐢</span><br><span id="feature-speed-jshint-slow">slow</span></td>
+              <td class="meh"><span aria-labelled-by="feature-speed-rslint-capable">🐇</span><br><span id="feature-speed-rslint-capable">capable</span></td>
+            </tr>
+            <tr>
+              <th>easy npm install</th>
+              <td class="bad quick-lint-js"><span aria-label="hard">❌</span><span aria-label="planned" title="planned" class="footnote-marker">&nbsp;*</span></td>
+              <td class="good"><span aria-label="easy">✅</span></td>
+              <td class="good"><span aria-label="easy">✅</span></td>
+              <td class="bad"><span aria-label="hard">❌</span><span aria-label="planned" title="planned" class="footnote-marker">&nbsp;<a href="https://old.reddit.com/r/javascript/comments/j4zj3c/rslint_an_extremely_fast_javascript_linter/g7r46mp/?context=1">*</a></span></td>
+            </tr>
+            <tr>
+              <th>easy setup</th>
+              <td class="good quick-lint-js"><span aria-label="easy">✅</span><br>zero config</td>
+              <td class="meh"><span aria-label="hard">❌</span><br>config or <tt>init</tt></td>
+              <td class="bad"><span aria-label="hard">❌</span><br>config</td>
+              <td class="good"><span aria-label="easy">✅</span><br>config optional</td>
+            </tr>
+            <tr>
+              <th>JSX</th>
+              <td class="bad quick-lint-js"><span aria-label="no">❌</span><span aria-label="planned" title="planned" class="footnote-marker">&nbsp;*</span></td>
+              <td class="meh"><span aria-label="yes">✅</span><span aria-label="with plugin" title="with plugin" class="footnote-marker">&nbsp;†</span></td>
+              <td class="bad"><span aria-label="no">❌</span></td>
+              <td class="bad"><span aria-label="no">❌</span><span aria-label="planned" title="planned" class="footnote-marker">&nbsp;*</span></td>
+            </tr>
+            <tr>
+              <th>TypeScript</th>
+              <td class="bad quick-lint-js"><span aria-label="no">❌</span><span aria-label="planned" title="planned" class="footnote-marker">&nbsp;*</span></td>
+              <td class="meh"><span aria-label="yes">✅</span><span aria-label="with plugin" title="with plugin" class="footnote-marker">&nbsp;<a href="https://typescript-eslint.io/">†</a></span></td>
+              <td class="bad"><span aria-label="no">❌</span></td>
+              <td class="bad"><span aria-label="no">❌</span><span aria-label="planned" title="planned" class="footnote-marker">&nbsp;*</span></td>
+            </tr>
+            <tr>
+              <th>editor integration</th>
+              <td class="meh quick-lint-js">Vim<br>LSP planned</td>
+              <td class="good"><a href="https://eslint.org/docs/user-guide/integrations">yes</a></td>
+              <td class="good"><a href="https://jshint.com/install/">yes</a></td>
+              <td class="bad"><span aria-label="no">❌</span><span aria-label="planned" title="planned" class="footnote-marker">&nbsp;<a href="https://old.reddit.com/r/rust/comments/j4z1ud/rslint_an_extremely_fast_and_user_friendly/g7oka27/?context=1">*</a></span></td>
+            </tr>
+            <tr>
+              <th>lint rules</th>
+              <td class="meh quick-lint-js">minimal</td>
+              <td class="good"><a href="https://eslint.org/docs/rules/">zillions</a></td>
+              <td class="meh"><a href="https://jshint.com/docs/options/">some</a></td>
+              <td class="meh"><a href="https://rdambrosio016.github.io/RSLint/rules/index.html">some</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <figcaption>
+          <p id="footnote-planned"><span aria-label="planned footnote">*</span> feature is planned</p>
+          <p id="footnote-with-plugin"><span aria-label="planned with plugin">†</span> feature requires a plugin</p>
+        </figcaption>
+      </figure>
+    </main>
+  </body>
+</html>
